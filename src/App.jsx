@@ -10,6 +10,7 @@ function App() {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 
+	/* Kullanicinin aradigi terimi girdikten sonra api'ya yaptigimiz cagri fonksiyonu */
 	const handleClick = e => {
 		e.preventDefault();
 		setLoading(true);
@@ -44,6 +45,7 @@ function App() {
 				</div>
 			</div>
 
+			{/* Gelen sonuclarin degerlerini Book componentine prop olarak geciyoruz */}
 			<div className='books'>
 				{loading && <div>Loading...</div>}
 				{!loading &&
@@ -54,6 +56,7 @@ function App() {
 							title={book.volumeInfo.title}
 							authors={book.volumeInfo.authors}
 							description={book.volumeInfo.description}
+							pageCount={book.volumeInfo.pageCount}
 						/>
 					))}
 			</div>
