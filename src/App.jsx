@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import "./App.css";
 
-import Book from "./components/Book";
+import Book from "./Components/Book";
 
 function App() {
 	const [searchTerm, setSearchTerm] = useState("");
