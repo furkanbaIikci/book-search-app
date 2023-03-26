@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import "./App.css";
 
-import Book from "./components/Book";
+import Book from "./components/Book.jsx";
 
 function App() {
 	const [searchTerm, setSearchTerm] = useState("");
