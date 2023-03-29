@@ -14,11 +14,21 @@ function App() {
 	const handleClick = e => {
 		e.preventDefault();
 		setLoading(true);
-		console.log("searchTerm", searchTerm);
-		axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`).then(res => {
-			setData(res.data.items);
+
+		if (searchTerm === "") {
 			setLoading(false);
-		});
+			return;
+		} else {
+			axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`).then(res => {
+				if (res.data.items !== undefined) {
+					setData(res.data.items);
+					setLoading(false);
+				} else {
+					setLoading(false);
+					alert("No results found");
+				}
+			});
+		}
 	};
 
 	return (
@@ -35,6 +45,7 @@ function App() {
 								type='text'
 								value={searchTerm}
 								onChange={e => setSearchTerm(e.target.value)}
+								required
 							/>
 							<br />
 							<button className='search-button' type='submit'>
@@ -52,11 +63,11 @@ function App() {
 					data.map((book, index) => (
 						<Book
 							key={index}
-							imageLinks={book.volumeInfo.imageLinks.thumbnail}
-							title={book.volumeInfo.title}
-							authors={book.volumeInfo.authors}
-							description={book.volumeInfo.description}
-							pageCount={book.volumeInfo.pageCount}
+							imageLinks={book.volumeInfo.imageLinks?.thumbnail}
+							title={book.volumeInfo?.title}
+							authors={book.volumeInfo?.authors}
+							description={book.volumeInfo?.description}
+							pageCount={book.volumeInfo?.pageCount}
 						/>
 					))}
 			</div>
